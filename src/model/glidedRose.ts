@@ -10,7 +10,7 @@ export class Item {
   }
 }
 
-export class GildedRose {
+export class Shop {
   items: Array<Item>;
 
   constructor(items = [] as Array<Item>) {

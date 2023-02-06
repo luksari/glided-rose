@@ -1,4 +1,5 @@
-import { Item, GildedRose } from '@/model/glidedRose';
+import { Item, Shop } from '@/model/glidedRose';
+import { describe, expect, it } from 'vitest';
 
 describe('Gilded Rose', () => {
   it("should return correct result", () => {
