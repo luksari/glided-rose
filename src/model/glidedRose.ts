@@ -19,22 +19,22 @@ export class GlidedRoseShop {
 
   private calculateQualityNormalItem = ({ sellIn, quality }: Item) => {
     const isQualityBiggerThan0 = quality > 0;
-    const areNoMoreDaysToSell = sellIn < 0;
+    const isAfterSellIn = sellIn < 0;
   
-    if (isQualityBiggerThan0 && areNoMoreDaysToSell) return -2;
+    if (isQualityBiggerThan0 && isAfterSellIn) return -2;
     if (isQualityBiggerThan0) return -1;
   
     return 0;
   };
 
   private calculateQualityBackstagePasses = ({ sellIn, quality }: Item) => {
-    const tenDaysOrLessToSell = sellIn <= 10;
-    const fiveDaysOrLessToSell = sellIn <= 5;
-    const areNoMoreDaysToSell = sellIn < 0;
+    const isTenDaysOrLessToSel = sellIn <= 10;
+    const isFiveDaysOrLessToSell = sellIn <= 5;
+    const isAfterSellIn = sellIn < 0;
   
-    if (areNoMoreDaysToSell) return -quality;
-    if (fiveDaysOrLessToSell) return 3;
-    if (tenDaysOrLessToSell) return 2;
+    if (isAfterSellIn) return -quality;
+    if (isFiveDaysOrLessToSell) return 3;
+    if (isTenDaysOrLessToSel) return 2;
   
     return +1;
   };
@@ -45,22 +45,30 @@ export class GlidedRoseShop {
     return 0;
   };
 
+  
+  private calculateQualityConjured = (item: Item) => {
+    return this.calculateQualityNormalItem(item) * 2;
+  };
+
+
   private calculateQuality = (item: Item) => {
     const isSulfuras = item.name == "Sulfuras, Hand of Ragnaros";
     const isAgedBrie = item.name == "Aged Brie";
     const isBackstagePasses =
     item.name == "Backstage passes to a TAFKAL80ETC concert";
+    const isConjuredItem = item.name.includes("Conjured");
     const isNormalItem =
-      !isAgedBrie && !isBackstagePasses && !isSulfuras
+      !isAgedBrie && !isBackstagePasses && !isSulfuras && !isConjuredItem
   
     if (isNormalItem) return this.calculateQualityNormalItem(item);
     if (isBackstagePasses) return this.calculateQualityBackstagePasses(item);
     if (isAgedBrie) return this.calculateQualityAgedBrie(item);
+    if (isConjuredItem) return this.calculateQualityConjured(item);
   
     return 0;
   }
   
-  private calculateSellin  = ({ sellIn, name }: Item) => {
+  private calculateSellin  = ({ name }: Item) => {
     const isSulfuras = name == "Sulfuras, Hand of Ragnaros";
     return !isSulfuras ? -1 : 0;
   };

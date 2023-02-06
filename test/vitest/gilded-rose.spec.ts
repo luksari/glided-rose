@@ -12,8 +12,8 @@ describe('Gilded Rose', () => {
   });
 
   it("If sellIn date passes quality should be decreased twice as fast", () => {
-    const storeItems = [new Item("Regular item", 0, 6)];
-    const expectedResult = [new Item("Regular item", -1, 4)];
+    const storeItems = [new Item("Regular item which you may find on some shelf", 0, 6)];
+    const expectedResult = [new Item("Regular item which you may find on some shelf", -1, 4)];
     const gildedRose = new GlidedRoseShop(storeItems);
     const items = gildedRose.updateQuality();
 
@@ -43,6 +43,18 @@ describe("Aged brie", () => {
   it("the quality of an aged brie should increase by 1", () => {
     const storeItems = [new Item("Aged Brie", 1, 5)];
     const expectedResult = [new Item("Aged Brie", 0, 6)];
+    const gildedRose = new GlidedRoseShop(storeItems);
+    const items = gildedRose.updateQuality();
+
+    expect(items).toStrictEqual(expectedResult);
+  });
+});
+
+describe("Conjured", () => {
+  it("the quality of conjured items should decrease twice as fast", () => 
+  {
+    const storeItems = [new Item("Conjured Codedazure sword", 10, 20)];
+    const expectedResult = [new Item("Conjured Codedazure sword", 9, 18)];
     const gildedRose = new GlidedRoseShop(storeItems);
     const items = gildedRose.updateQuality();
 
