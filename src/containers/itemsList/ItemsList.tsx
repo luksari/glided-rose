@@ -1,1 +1,3 @@
-export const ItemsList = () => {};
+export const ItemsList = () => {
+  return <div></div>;
+};

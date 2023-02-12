@@ -1,11 +1,15 @@
+import { ItemsList } from '@/containers/itemsList/ItemsList';
+
 export const Root = () => {
+  const x = 
   return (
-    <>
-      <div id="sidebar">
+    <main>
+      <div>
         <h1>Gilded Rose</h1>
-        <div></div>
       </div>
-      <div id="detail"></div>
-    </>
+      <div id="detail">
+        <ItemsList />
+      </div>
+    </main>
   );
 };

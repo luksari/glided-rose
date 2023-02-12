@@ -5,19 +5,15 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-<<<<<<< HEAD
     "preview": "vite preview",
     "precompile": "rimraf src/model/**/*.js test/**/*.js",
     "compile": "tsc",
     "pretest": "rimraf src/model/**/*.js test/**/*.js",
-    "test": "vitest"
-=======
-    "serve": "vite preview",
+    "test": "vitest",
     "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
     "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
     "lint": "yarn lint:format && yarn lint:fix ",
     "type-check": "tsc"
->>>>>>> feat: basic eslint/prettier config
   },
   "dependencies": {
     "localforage": "^1.10.0",
@@ -34,13 +30,11 @@
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
     "@vitejs/plugin-react": "^3.1.0",
-<<<<<<< HEAD
     "jsdom": "^21.1.0",
     "rimraf": "~3.0.2",
     "source-map-support": "^0.5.20",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.11.0",
-=======
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.27.5",
@@ -49,7 +43,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "^2.8.4",
->>>>>>> feat: basic eslint/prettier config
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
     "vitest": "^0.28.4"
