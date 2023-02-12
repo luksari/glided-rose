@@ -14,7 +14,13 @@ export class GildedRoseShop {
   items: Array<Item>;
 
   constructor(items = [] as Array<Item>) {
-    this.items = items;
+    const mappedItems = items.map((item) => {
+      if (this.isSulfuras(item)) {
+        return new Item(item.name, item.sellIn, 80);
+      }
+      return item;
+    });
+    this.items = mappedItems;
   }
   public isSulfuras = (item: Item) => item.name === 'Sulfuras, Hand of Ragnaros';
   public isAgedBrie = (item: Item) => item.name === 'Aged Brie';
@@ -28,9 +34,11 @@ export class GildedRoseShop {
     !this.isSulfuras(item) &&
     !this.isConjured(item);
 
-  private calculateQualityNormalItem = ({ sellIn, quality }: Item) => {
-    const isQualityBiggerThan0 = quality > 0;
-    const isAfterSellIn = sellIn < 0;
+  public isAfterSellIn = (item: Item) => item.sellIn < 0;
+
+  private calculateQualityNormalItem = (item: Item) => {
+    const isQualityBiggerThan0 = item.quality > 0;
+    const isAfterSellIn = this.isAfterSellIn(item);
 
     if (isQualityBiggerThan0 && isAfterSellIn) return -2;
     if (isQualityBiggerThan0) return -1;
@@ -38,12 +46,12 @@ export class GildedRoseShop {
     return 0;
   };
 
-  private calculateQualityBackstagePasses = ({ sellIn, quality }: Item) => {
-    const isTenDaysOrLessToSel = sellIn <= 10;
-    const isFiveDaysOrLessToSell = sellIn <= 5;
-    const isAfterSellIn = sellIn < 0;
+  private calculateQualityBackstagePasses = (item: Item) => {
+    const isTenDaysOrLessToSel = item.sellIn <= 10;
+    const isFiveDaysOrLessToSell = item.sellIn <= 5;
+    const isAfterSellIn = item.sellIn < 0;
 
-    if (isAfterSellIn) return -quality;
+    if (isAfterSellIn) return -item.quality;
     if (isFiveDaysOrLessToSell) return 3;
     if (isTenDaysOrLessToSel) return 2;
 
@@ -61,10 +69,24 @@ export class GildedRoseShop {
   };
 
   private calculateQuality = (item: Item) => {
-    if (this.isNormalItem(item)) return this.calculateQualityNormalItem(item);
-    if (this.isBackstagePasses(item)) return this.calculateQualityBackstagePasses(item);
-    if (this.isAgedBrie(item)) return this.calculateQualityAgedBrie(item);
-    if (this.isConjured(item)) return this.calculateQualityConjured(item);
+    let diff = 0;
+    if (this.isNormalItem(item)) {
+      diff = this.calculateQualityNormalItem(item);
+    }
+    if (this.isBackstagePasses(item)) {
+      diff = this.calculateQualityBackstagePasses(item);
+    }
+    if (this.isAgedBrie(item)) {
+      diff = this.calculateQualityAgedBrie(item);
+    }
+    if (this.isConjured(item)) {
+      diff = this.calculateQualityConjured(item);
+    }
+    if (item.quality + diff < 0) {
+      return -item.quality;
+    } else {
+      return diff;
+    }
 
     return 0;
   };
@@ -87,7 +109,7 @@ const items = [
   new Item('Cloak of Invisibility', 24, 30),
   new Item('Wand with Phoenix feather', 16, 45),
   new Item('Mana Potion', 1, 15),
-  new Item('Aged brie', 5, 30),
+  new Item('Aged Brie', 5, 30),
   new Item(`Spider's legs`, 24, 1),
   new Item(`Sulfuras, Hand of Ragnaros`, 10, 5),
   new Item(`Backstage passes to a TAFKAL80ETC concert`, 25, 4),

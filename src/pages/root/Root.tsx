@@ -1,14 +1,12 @@
 import { ItemsList } from '@/containers/itemsList/ItemsList';
 
+import { Title } from './Root.styles';
+
 export const Root = () => {
   return (
     <main>
-      <div>
-        <h1>Gilded Rose</h1>
-      </div>
-      <section>
-        <ItemsList />
-      </section>
+      <Title>Gilded Rose</Title>
+      <ItemsList />
     </main>
   );
 };

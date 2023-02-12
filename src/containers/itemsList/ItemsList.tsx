@@ -3,7 +3,12 @@ import { useCallback, useState } from 'react';
 import { ItemCard } from '@/components/itemCard/ItemCard';
 import { gildedRoseShop, Item } from '@/model/gildedRose';
 
-import { ItemsListContainer, ItemsListWrapper } from './ItemsList.styles';
+import {
+  Button,
+  ButtonWrapper,
+  ItemsListContainer,
+  ItemsListWrapper,
+} from './ItemsList.styles';
 
 export const ItemsList = () => {
   const [items, setItems] = useState<Item[]>(gildedRoseShop.items);
@@ -15,9 +20,9 @@ export const ItemsList = () => {
 
   return (
     <ItemsListWrapper>
-      <div>
-        <button onClick={updateItems}>Update items</button>
-      </div>
+      <ButtonWrapper>
+        <Button onClick={updateItems}>Update items</Button>
+      </ButtonWrapper>
       <ItemsListContainer>
         {items.map((item, idx) => (
           <ItemCard key={`${item.name}+${idx}`} item={item} />

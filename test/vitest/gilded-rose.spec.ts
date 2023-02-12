@@ -66,8 +66,8 @@ describe('Conjured', () => {
 
 describe('Sulfuras', () => {
   it('the quality of Sulfuras never changes', () => {
-    const storeItems = [new Item('Sulfuras, Hand of Ragnaros', 50, 45)];
-    const expectedResult = [new Item('Sulfuras, Hand of Ragnaros', 50, 45)];
+    const storeItems = [new Item('Sulfuras, Hand of Ragnaros', 50, 80)];
+    const expectedResult = [new Item('Sulfuras, Hand of Ragnaros', 50, 80)];
     const gildedRose = new GildedRoseShop(storeItems);
     const items = gildedRose.updateQuality();
 

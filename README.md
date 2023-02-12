@@ -19,3 +19,10 @@ Not much time left to acomplish this task that is why I've decided to make it as
 6. Add more functionalities e.g adding items to cart, but it is not handled by the domain for now
 7. Animations in Framer Motion when the quality/sell-in changes
 8. Handle domain states/different items by UI representation. E.g Quality is red when it is below 0, Sell in gets orange if it reaches end for normal items or so
+9. Write some tests of user flow
+
+## How to start
+
+```bash
+yarn dev
+```
