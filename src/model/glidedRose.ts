@@ -16,6 +16,17 @@ export class GlidedRoseShop {
   constructor(items = [] as Array<Item>) {
     this.items = items;
   }
+  public isSulfuras = (item: Item) => item.name === 'Sulfuras, Hand of Ragnaros';
+  public isAgedBrie = (item: Item) => item.name === 'Aged Brie';
+  public isBackstagePasses = (item: Item) =>
+    item.name === 'Backstage passes to a TAFKAL80ETC concert';
+  public isConjured = (item: Item) => item.name.includes('Conjured');
+
+  public isNormalItem = (item: Item) =>
+    !this.isAgedBrie(item) &&
+    !this.isBackstagePasses(item) &&
+    !this.isSulfuras(item) &&
+    !this.isConjured(item);
 
   private calculateQualityNormalItem = ({ sellIn, quality }: Item) => {
     const isQualityBiggerThan0 = quality > 0;
@@ -50,24 +61,16 @@ export class GlidedRoseShop {
   };
 
   private calculateQuality = (item: Item) => {
-    const isSulfuras = item.name == 'Sulfuras, Hand of Ragnaros';
-    const isAgedBrie = item.name == 'Aged Brie';
-    const isBackstagePasses = item.name == 'Backstage passes to a TAFKAL80ETC concert';
-    const isConjuredItem = item.name.includes('Conjured');
-    const isNormalItem =
-      !isAgedBrie && !isBackstagePasses && !isSulfuras && !isConjuredItem;
-
-    if (isNormalItem) return this.calculateQualityNormalItem(item);
-    if (isBackstagePasses) return this.calculateQualityBackstagePasses(item);
-    if (isAgedBrie) return this.calculateQualityAgedBrie(item);
-    if (isConjuredItem) return this.calculateQualityConjured(item);
+    if (this.isNormalItem(item)) return this.calculateQualityNormalItem(item);
+    if (this.isBackstagePasses(item)) return this.calculateQualityBackstagePasses(item);
+    if (this.isAgedBrie(item)) return this.calculateQualityAgedBrie(item);
+    if (this.isConjured(item)) return this.calculateQualityConjured(item);
 
     return 0;
   };
 
-  private calculateSellin = ({ name }: Item) => {
-    const isSulfuras = name == 'Sulfuras, Hand of Ragnaros';
-    return !isSulfuras ? -1 : 0;
+  private calculateSellin = (item: Item) => {
+    return this.isSulfuras(item) ? 0 : -1;
   };
 
   updateQuality() {
@@ -80,4 +83,14 @@ export class GlidedRoseShop {
   }
 }
 
-export const GlidedRoseShop = new GlidedRoseShop([]);
+const items = [
+  new Item('Cloak of Invisibility', 24, 30),
+  new Item('Wand with Phoenix feather', 16, 45),
+  new Item('Mana Potion', 1, 15),
+  new Item('Aged brie', 5, 30),
+  new Item(`Spider's legs`, 24, 1),
+  new Item(`Sulfuras, Hand of Ragnaros`, 10, 5),
+  new Item(`Backstage passes to a TAFKAL80ETC concert`, 25, 4),
+];
+
+export const glidedRoseShop = new GlidedRoseShop(items);
