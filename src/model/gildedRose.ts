@@ -10,7 +10,7 @@ export class Item {
   }
 }
 
-export class GlidedRoseShop {
+export class GildedRoseShop {
   items: Array<Item>;
 
   constructor(items = [] as Array<Item>) {
@@ -93,4 +93,4 @@ const items = [
   new Item(`Backstage passes to a TAFKAL80ETC concert`, 25, 4),
 ];
 
-export const glidedRoseShop = new GlidedRoseShop(items);
+export const gildedRoseShop = new GildedRoseShop(items);

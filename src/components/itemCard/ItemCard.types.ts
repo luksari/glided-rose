@@ -1,4 +1,4 @@
-import { Item } from '@/model/glidedRose';
+import { Item } from '@/model/gildedRose';
 
 export type ItemCardProps = {
   item: Item;

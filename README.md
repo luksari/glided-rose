@@ -18,4 +18,4 @@ Not much time left to acomplish this task that is why I've decided to make it as
 5. Display more details about Glided Rose Item but it is up to domain
 6. Add more functionalities e.g adding items to cart, but it is not handled by the domain for now
 7. Animations in Framer Motion when the quality/sell-in changes
-8. Handle domain states/different items by UI representation. E.g Quality is red when it is below 0, Sell in gets orange if it reaches end for normal items
+8. Handle domain states/different items by UI representation. E.g Quality is red when it is below 0, Sell in gets orange if it reaches end for normal items or so

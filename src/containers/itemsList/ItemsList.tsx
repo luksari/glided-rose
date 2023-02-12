@@ -1,26 +1,28 @@
 import { useCallback, useState } from 'react';
 
 import { ItemCard } from '@/components/itemCard/ItemCard';
-import { glidedRoseShop, Item } from '@/model/glidedRose';
+import { gildedRoseShop, Item } from '@/model/gildedRose';
+
+import { ItemsListContainer, ItemsListWrapper } from './ItemsList.styles';
 
 export const ItemsList = () => {
-  const [items, setItems] = useState<Item[]>(glidedRoseShop.items);
+  const [items, setItems] = useState<Item[]>(gildedRoseShop.items);
 
   const updateItems = useCallback(() => {
-    const updatedItems = glidedRoseShop.updateQuality();
+    const updatedItems = gildedRoseShop.updateQuality();
     setItems(updatedItems);
   }, []);
 
   return (
-    <div>
+    <ItemsListWrapper>
       <div>
         <button onClick={updateItems}>Update items</button>
       </div>
-      <ul>
+      <ItemsListContainer>
         {items.map((item, idx) => (
           <ItemCard key={`${item.name}+${idx}`} item={item} />
         ))}
-      </ul>
-    </div>
+      </ItemsListContainer>
+    </ItemsListWrapper>
   );
 };

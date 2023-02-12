@@ -1,4 +1,4 @@
-import { GildedRose, Item } from '@/model/gildedRose';
+import { GildedRoseShop, Item } from '@/model/gildedRose';
 
 const items = [
   new Item('+5 Dexterity Vest', 10, 20), //
@@ -13,7 +13,7 @@ const items = [
   new Item('Conjured Mana Cake', 3, 6),
 ];
 
-const gildedRose = new GildedRose(items);
+const gildedRose = new GildedRoseShop(items);
 
 let days = 2;
 if (process.argv.length > 2) {
